@@ -1,6 +1,8 @@
 package com.company.engine;
 
 import com.company.Settings;
+import com.company.engine.village.resources;
+import com.company.engine.village.village;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,15 +14,16 @@ import java.util.List;
 import java.util.Random;
 
 public class Engine {
-    public static List<String> expans = new ArrayList<>();
+    public static List<String> expansNames = new ArrayList<>();
     public static List<WebDriver> drivers = new ArrayList<>();
-    private static boolean initialised = false;
     public static WebDriverWait wait;
+    public static List<village> villages = new ArrayList<>();
+    private static boolean initialised = false;
 
     public static void addExp(String expand){
-        Integer index = expans.size()+1;
+        Integer index = expansNames.size()+1;
         if ( expand.contains( index.toString() ) ){
-            expans.add( expand );
+            expansNames.add(expand);
         }else {
             System.out.println("Error edding expand - engine.addExp");
         }
@@ -57,13 +60,13 @@ public class Engine {
     }
 
     public static void login( WebDriver driver ){
-        w8alittle();
         driver.get("http://ts2.travian.ru");
         WebElement loginInput = driver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/div[1]/form/table/tbody/tr[1]/td[2]/input"));
         loginInput.sendKeys(Settings.login);
         WebElement passInput = driver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/div[1]/form/table/tbody/tr[2]/td[2]/input"));
         passInput.sendKeys(Settings.password);
         WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"s1\"]"));
+        w8alittle();
         loginButton.click();
         wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"villageNameField\"]")));
@@ -73,17 +76,31 @@ public class Engine {
         List<WebElement> expanList = driver.findElements(By.xpath("//*[@id=\"sidebarBoxVillagelist\"]/div[2]/div[2]/ul/li"));
         expanList.forEach( expDiv -> {
             String expname = expDiv.getText();
-            expname = expname.replace("\n","");
-            expans.add( expname );
+            expname = expname.replace("\n","").replace("\u202D","").replace("\u202C","");
+            expansNames.add(expname);
         });
-        for (int i = 0; i < expans.size(); i++) {
+        for (int i = 0; i < expansNames.size(); i++) {
             currentExp.ince().changeExp(i+1, driver);
+            analyzeVillage( driver );
         }
     }
 
-    public static void analyzeVillageBuildings( WebDriver driver ){
+    private static void analyzeVillage( WebDriver driver ){
+        ananyleResources( driver );
+    }
+
+    private static void analyzeVillageBuildings( WebDriver driver ){
         if ( driver.findElements(By.xpath("//*[@id=\"content\"]/div[2]")).size()>0 ){
 
         }
+    }
+
+    private static void ananyleResources( WebDriver driver ){
+        Float wood  = Float.parseFloat( driver.findElement(By.xpath("//*[@id=\"l1\"]")).getText() );
+        Float clay  = Float.parseFloat( driver.findElement(By.xpath("//*[@id=\"l2\"]")).getText() );
+        Float iron  = Float.parseFloat( driver.findElement(By.xpath("//*[@id=\"l3\"]")).getText() );
+        Float grain = Float.parseFloat( driver.findElement(By.xpath("//*[@id=\"l4\"]")).getText() );
+        village villageInfo = new village( currentExp.ince().getName() );
+        villageInfo.resources().set( new resources(wood, clay, iron, grain) );
     }
 }
