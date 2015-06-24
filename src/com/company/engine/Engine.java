@@ -1,6 +1,7 @@
 package com.company.engine;
 
 import com.company.Settings;
+import com.company.engine.village.building;
 import com.company.engine.village.resources;
 import com.company.engine.village.village;
 import org.openqa.selenium.By;
@@ -78,20 +79,32 @@ public class Engine {
             String expname = expDiv.getText();
             expname = expname.replace("\n","").replace("\u202D","").replace("\u202C","");
             expansNames.add(expname);
+            village newV = new village(expname);
+            villages.add( newV );
         });
         for (int i = 0; i < expansNames.size(); i++) {
             currentExp.ince().changeExp(i+1, driver);
             analyzeVillage( driver );
+            System.out.println( getCurrentVillage() );
         }
     }
 
     private static void analyzeVillage( WebDriver driver ){
         ananyleResources( driver );
+        analyzeVillageBuildings( driver );
     }
 
     private static void analyzeVillageBuildings( WebDriver driver ){
-        if ( driver.findElements(By.xpath("//*[@id=\"content\"]/div[2]")).size()>0 ){
-
+        if ( driver.findElements(By.xpath("//*[@id=\"content\"]/div[2]/div[10]/ul/li")).size()>0 && currentExp.ince().checkWindow(1,2)){
+            List<WebElement> builds = driver.findElements(By.xpath("//*[@id=\"content\"]/div[2]/div[10]/ul/li"));
+            builds.forEach( element -> {
+                String divText = element.findElement(By.xpath("./div[1]")).getText();
+                String name = divText.substring(0, divText.indexOf("Уровень")-1);
+                String level = divText.substring( divText.indexOf("Уровень")+8);
+                String timeLeft = element.findElement(By.xpath("./div[2]/span")).getText();
+                building build = building.Builder.ince().level(Integer.parseInt(level)).name(name).timeLeft(timeLeft).build();
+                getCurrentVillage().addBInProc( build );
+            } );
         }
     }
 
@@ -100,7 +113,11 @@ public class Engine {
         Float clay  = Float.parseFloat( driver.findElement(By.xpath("//*[@id=\"l2\"]")).getText() );
         Float iron  = Float.parseFloat( driver.findElement(By.xpath("//*[@id=\"l3\"]")).getText() );
         Float grain = Float.parseFloat( driver.findElement(By.xpath("//*[@id=\"l4\"]")).getText() );
-        village villageInfo = new village( currentExp.ince().getName() );
-        villageInfo.resources().set( new resources(wood, clay, iron, grain) );
+        village villageInfo = getCurrentVillage();
+        villageInfo.resources().set(new resources(wood, clay, iron, grain));
+    }
+
+    public static village getCurrentVillage(){
+        return villages.get( currentExp.ince().getCvindex()-1 );
     }
 }

@@ -10,12 +10,26 @@ public class currentExp {
     public static currentExp ince() {
         return ourInstance;
     }
-    private final long w8timeout = 10000;
-
-    private int cvindex; // index of current village
     private currentExp() {
     }
+    private final long w8timeout = 10000;
 
+    /**
+     *
+     * @return index of current village
+     */
+    public int getCvindex() {
+        return cvindex;
+    }
+
+    private int cvindex; // index of current village
+    private int currentWindow = 1; // current window on village 1=fileds 2=village
+
+    /**
+     * Changes the current village into another one specified by index
+     * @param index village to enter
+     * @param driver WebDriver of window
+     */
     public void changeExp(int index, WebDriver driver){
         WebElement expand = driver.findElement(By.xpath("//*[@id=\"sidebarBoxVillagelist\"]/div[2]/div[2]/ul/li[" + index + "]"));
         cvindex = index;
@@ -24,7 +38,11 @@ public class currentExp {
         Engine.w8alittle();
     }
 
-    // useless
+    /**
+     * Checks whether the current window`s village is current as we think
+     * @param driver WebDriver of window
+     * @return all is ok
+     */
     private boolean currentVillageCheck( WebDriver driver ){
         try {
             Engine.wait.until( ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"villageNameField\"]")));
@@ -38,6 +56,10 @@ public class currentExp {
         }
     }
 
+    /**
+     * Waits w8timeout on driver while he opens new village that should be current
+     * @param driver WebDriver of window
+     */
     private void waitThisToBeCurrent(WebDriver driver){
         long timeStart = System.currentTimeMillis();
         while ( !currentVillageCheck(driver) ){
@@ -50,7 +72,45 @@ public class currentExp {
         }
     }
 
+    /**
+     * Return the name of the current village
+     * @return Name of village
+     */
     public String getName(){
         return Engine.expansNames.get( cvindex-1 );
+    }
+
+    /**
+     * Chanes the window state to a new one
+     * 1 = resourse fields
+     * 2 = village inner view (buildings)
+     * @param windowId new window state Id
+     * @param driver WebDriver of window
+     */
+    public void changeWindow(int windowId, WebDriver driver){
+        switch (windowId){
+            case 0:
+                driver.findElement(By.xpath("//*[@id=\"n1\"]")).click();
+                currentWindow = 0;
+                break;
+            case 1:
+                driver.findElement(By.xpath("//*[@id=\"n2\"]")).click();
+                currentWindow = 1;
+                break;
+        }
+    }
+
+    /**
+     * Check whether the current window state is one of the window ids
+     * @param windowId list of windows ids to check
+     * @return window is in one of the states of windowIds
+     */
+    public boolean checkWindow( int ... windowId ){
+        for (int id : windowId){
+            if ( id == currentWindow){
+                return true;
+            }
+        }
+        return false;
     }
 }

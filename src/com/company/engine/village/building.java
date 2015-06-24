@@ -50,7 +50,10 @@ public class building {
         private long timeLeft;
         private String name;
         private int level;
-        private int slotId;
+        private int slotId = -1;
+        public static Builder ince(){
+            return new Builder();
+        }
         public Builder timeLeft(String timeLeftInfo){
             //todo
             timeLeft = 0;
@@ -71,5 +74,12 @@ public class building {
         public building build(){
             return new building( timeLeft, name, level, slotId);
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(name).append(" level ").append(level).append("| timeleft :").append(timeLeft).append("\n");
+        return builder.toString();
     }
 }
