@@ -1,22 +1,24 @@
 package com.company.engine.village;
 
 public class building {
-    private long timeLeft;
+    private long timeLeftSecs;
+    private String timeLeftStr;
     private String name;
     private int level;
     private int slotId;
-    private building(long timeV, String nameV, int levelV, int slotV){
-        timeLeft = timeV;
+    private building(long timeVS, String timeLeftVS, String nameV, int levelV, int slotV){
+        timeLeftSecs = timeVS;
+        timeLeftStr = timeLeftVS;
         name = nameV;
         level = levelV;
         slotId = slotV;
     }
-    public long getTimeLeft() {
-        return timeLeft;
+    public String getTimeLeftStr() {
+        return timeLeftStr;
     }
 
-    public void setTimeLeft(long timeLeft) {
-        this.timeLeft = timeLeft;
+    public void setTimeLeftStr(String timeLeft) {
+        this.timeLeftStr = timeLeft;
     }
 
     public String getName() {
@@ -43,11 +45,20 @@ public class building {
         this.slotId = slotId;
     }
 
+    public long getTimeLeftSecs() {
+        return timeLeftSecs;
+    }
+
+    public void setTimeLeftSecs(long timeLeftSecs) {
+        this.timeLeftSecs = timeLeftSecs;
+    }
+
     /*
                         ===Builder===
      */
     public static class Builder{
-        private long timeLeft;
+        private String timeLeftStr;
+        private long timeLeftSecs;
         private String name;
         private int level;
         private int slotId = -1;
@@ -55,8 +66,11 @@ public class building {
             return new Builder();
         }
         public Builder timeLeft(String timeLeftInfo){
-            //todo
-            timeLeft = 0;
+            timeLeftStr = timeLeftInfo;
+            String[] splited = timeLeftInfo.split(":");
+            timeLeftSecs = Integer.parseInt( splited[0] )*360;
+            timeLeftSecs += Integer.parseInt( splited[1] )*60;
+            timeLeftSecs += Integer.parseInt( splited[2] );
             return this;
         }
         public Builder name(String nameVal){
@@ -72,14 +86,14 @@ public class building {
             return this;
         }
         public building build(){
-            return new building( timeLeft, name, level, slotId);
+            return new building( timeLeftSecs, timeLeftStr, name, level, slotId);
         }
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(name).append(" level ").append(level).append("| timeleft :").append(timeLeft).append("\n");
+        builder.append(name).append(" level ").append(level).append("| timeleft ").append(timeLeftStr).append(" inSeconds = ").append(timeLeftSecs).append("\n");
         return builder.toString();
     }
 }

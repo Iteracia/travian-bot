@@ -5,18 +5,21 @@ public class resources {
     private float clay;
     private float iron;
     private float grain;
+    private boolean isSet;
 
     public resources(){
         this.wood = 0;
         this.clay = 0;
         this.iron = 0;
         this.grain = 0;
+        isSet = false;
     }
     public resources(float wood, float clay, float iron, float grain) {
         this.wood = wood;
         this.clay = clay;
         this.iron = iron;
         this.grain = grain;
+        isSet = true;
     }
 
     public void set(resources reses){
@@ -25,6 +28,11 @@ public class resources {
         this.iron = reses.iron;
         this.grain = reses.grain;
     }
+
+    public boolean isSet() {
+        return isSet;
+    }
+
     public float getWood() {
         return wood;
     }

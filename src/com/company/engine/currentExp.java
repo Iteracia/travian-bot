@@ -89,14 +89,28 @@ public class currentExp {
      */
     public void changeWindow(int windowId, WebDriver driver){
         switch (windowId){
-            case 0:
-                driver.findElement(By.xpath("//*[@id=\"n1\"]")).click();
-                currentWindow = 0;
-                break;
             case 1:
+                driver.findElement(By.xpath("//*[@id=\"n1\"]")).click();
+                Engine.wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"n1\"]/a")));
+                WebElement element = driver.findElement(By.xpath("//*[@id=\"n1\"]/a"));
+                if ( element.getAttribute("class").equals("active") ){
+                    currentWindow = 1;
+                    Engine.w8alittle();
+                    break;
+                }else {
+                    changeWindow( windowId, driver );
+                }
+            case 2:
                 driver.findElement(By.xpath("//*[@id=\"n2\"]")).click();
-                currentWindow = 1;
-                break;
+                Engine.wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"n2\"]/a")));
+                element = driver.findElement(By.xpath("//*[@id=\"n2\"]/a"));
+                if ( element.getAttribute("class").equals("active") ){
+                    currentWindow = 2;
+                    Engine.w8alittle();
+                    break;
+                }else {
+                    changeWindow( windowId, driver );
+                }
         }
     }
 

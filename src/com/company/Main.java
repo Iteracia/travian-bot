@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.engine.Engine;
+import com.company.engine.currentExp;
 import org.openqa.selenium.WebDriver;
 
 public class Main {
@@ -10,7 +11,7 @@ public class Main {
         WebDriver driver = Engine.newDriver();
         try {
             Engine.login( driver );
-            Engine.analyzeExps( driver );
+            Engine.analyzeExps(driver);
             System.in.read();
             driver.quit();
         }catch (Exception e){

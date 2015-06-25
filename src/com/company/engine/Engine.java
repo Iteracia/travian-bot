@@ -90,8 +90,9 @@ public class Engine {
     }
 
     private static void analyzeVillage( WebDriver driver ){
-        ananyleResources( driver );
-        analyzeVillageBuildings( driver );
+        //ananyleResources( driver );
+        //analyzeVillageBuildings( driver );
+        analyzeTroops( driver );
     }
 
     private static void analyzeVillageBuildings( WebDriver driver ){
@@ -115,6 +116,17 @@ public class Engine {
         Float grain = Float.parseFloat( driver.findElement(By.xpath("//*[@id=\"l4\"]")).getText() );
         village villageInfo = getCurrentVillage();
         villageInfo.resources().set(new resources(wood, clay, iron, grain));
+    }
+
+    private static void analyzeTroops( WebDriver driver ){
+        if ( driver.findElements(By.xpath("//*[@id=\"troops\"]/tbody/tr")).size() >0 && currentExp.ince().checkWindow(1) ){
+            List<WebElement> elements = driver.findElements(By.xpath("//*[@id=\"troops\"]/tbody/tr"));
+            elements.forEach( element -> {
+                int count = Integer.parseInt( element.findElement(By.xpath("./td[2]")).getText() );
+                String type = element.findElement(By.xpath("./td[3]")).getText();
+                getCurrentVillage().troops().addTroop( count, type );
+            });
+        }
     }
 
     public static village getCurrentVillage(){
