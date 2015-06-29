@@ -2,22 +2,17 @@ package com.company;
 
 import com.company.engine.Engine;
 import com.company.engine.currentExp;
+import com.company.engine.executor;
 import org.openqa.selenium.WebDriver;
 
 public class Main {
 
     public static void main(String[] args) {
-        Engine.init();
-        WebDriver driver = Engine.newDriver();
         try {
-            Engine.login( driver );
-            Engine.analyzeExps(driver);
+            executor.ince().run();
             System.in.read();
-            driver.quit();
-        }catch (Exception e){
+        }catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            driver.quit();
         }
     }
 }

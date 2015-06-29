@@ -26,7 +26,7 @@ public class village {
     @Override
     public String toString() {
         StringBuilder responce = new StringBuilder();
-        responce.append("Village ").append(name).append("\n");
+        responce.append("> ").append(name).append("\n");
         if( resources().isSet() ) {
             responce.append(" = Resources = \n");
             responce.append("Wood : ").append(resourcesLink.getWood()).append("\n");

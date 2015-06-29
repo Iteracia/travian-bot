@@ -68,7 +68,7 @@ public class building {
         public Builder timeLeft(String timeLeftInfo){
             timeLeftStr = timeLeftInfo;
             String[] splited = timeLeftInfo.split(":");
-            timeLeftSecs = Integer.parseInt( splited[0] )*360;
+            timeLeftSecs = Integer.parseInt( splited[0] )*3600;
             timeLeftSecs += Integer.parseInt( splited[1] )*60;
             timeLeftSecs += Integer.parseInt( splited[2] );
             return this;

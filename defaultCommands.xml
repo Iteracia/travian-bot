@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<commands xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="./resources/command.xsd">
+    <command type="Analyze" id="1"/>
+    <command type="Analyze" id="2"/>
+    <command type="Analyze" id="3"/>
+</commands>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="commands">
+        <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="command"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="command">
+        <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="1">
+                <xs:element ref="from" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="to" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="resources" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="troop" minOccurs="0" maxOccurs="10"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:int" use="required"/>
+            <xs:attribute name="type" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="from" type="xs:int"/>
+
+    <xs:element name="to">
+        <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="1">
+                <xs:element name="x"/>
+                <xs:element name="y"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="resources">
+        <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="1">
+                <xs:element name="wood" type="xs:int" maxOccurs="1"/>
+                <xs:element name="clay" type="xs:int" maxOccurs="1"/>
+                <xs:element name="iron" type="xs:int" maxOccurs="1"/>
+                <xs:element name="grain" type="xs:int" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="troop">
+        <xs:complexType>
+            <xs:attribute name="id" use="required"/>
+            <xs:attribute name="count" use="required"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

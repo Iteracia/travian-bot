@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<commands xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="./resources/command.xsd">
+    <command type="Market" id="2">
+        <from>2</from>
+        <to>
+            <x>31</x>
+            <y>-85</y>
+        </to>
+        <resources>
+            <wood>1000</wood>
+            <clay>1000</clay>
+            <iron>1000</iron>
+            <grain>1000</grain>
+        </resources>
+    </command>
+    <command type="Barraks" id="2">
+        <from>2</from>
+        <to>
+            <x>22</x>
+            <y>33</y>
+        </to>
+        <troop id="1" count="100"/>
+    </command>
+</commands>

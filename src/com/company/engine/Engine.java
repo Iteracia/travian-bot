@@ -50,9 +50,13 @@ public class Engine {
         return newD;
     }
 
+    public static void closeDrivers(){
+        drivers.forEach( WebDriver::close );
+    }
+
     public static void init(){
         try {
-            System.setProperty("webdriver.chrome.driver", "C:\\travian\\lib\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "lib\\chromedriver.exe");
             initialised = true;
         }catch (Exception e){
             System.out.println("Cant init Engine");
@@ -91,11 +95,11 @@ public class Engine {
 
     private static void analyzeVillage( WebDriver driver ){
         //ananyleResources( driver );
-        //analyzeVillageBuildings( driver );
+        analyzeVillageBuildings( driver );
         analyzeTroops( driver );
     }
 
-    private static void analyzeVillageBuildings( WebDriver driver ){
+    public static void analyzeVillageBuildings( WebDriver driver ){
         if ( driver.findElements(By.xpath("//*[@id=\"content\"]/div[2]/div[10]/ul/li")).size()>0 && currentExp.ince().checkWindow(1,2)){
             List<WebElement> builds = driver.findElements(By.xpath("//*[@id=\"content\"]/div[2]/div[10]/ul/li"));
             builds.forEach( element -> {
@@ -109,7 +113,7 @@ public class Engine {
         }
     }
 
-    private static void ananyleResources( WebDriver driver ){
+    public static void analyzeResources( WebDriver driver ){
         Float wood  = Float.parseFloat( driver.findElement(By.xpath("//*[@id=\"l1\"]")).getText() );
         Float clay  = Float.parseFloat( driver.findElement(By.xpath("//*[@id=\"l2\"]")).getText() );
         Float iron  = Float.parseFloat( driver.findElement(By.xpath("//*[@id=\"l3\"]")).getText() );
@@ -118,7 +122,7 @@ public class Engine {
         villageInfo.resources().set(new resources(wood, clay, iron, grain));
     }
 
-    private static void analyzeTroops( WebDriver driver ){
+    public static void analyzeTroops( WebDriver driver ){
         if ( driver.findElements(By.xpath("//*[@id=\"troops\"]/tbody/tr")).size() >0 && currentExp.ince().checkWindow(1) ){
             List<WebElement> elements = driver.findElements(By.xpath("//*[@id=\"troops\"]/tbody/tr"));
             elements.forEach( element -> {

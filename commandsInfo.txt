@@ -1,0 +1,12 @@
+<= Analyze =>
+1 - Resources
+2 - VillageBuildings
+3 - Troops
+
+<= Market =>
+1 - upgrade
+2 - send resources
+
+<= Barracks =>
+1 - upgrade
+2 - send troops
