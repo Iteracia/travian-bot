@@ -14,12 +14,4 @@
             <grain>1000</grain>
         </resources>
     </command>
-    <command type="Barraks" id="2">
-        <from>2</from>
-        <to>
-            <x>22</x>
-            <y>33</y>
-        </to>
-        <troop id="1" count="100"/>
-    </command>
 </commands>

@@ -1,9 +1,12 @@
 package com.company.engine;
 
+import com.company.engine.building.Building;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.List;
 
 public class CurrentExp {
     private static CurrentExp ourInstance = new CurrentExp();
@@ -84,6 +87,7 @@ public class CurrentExp {
      * Chanes the window state to a new one
      * 1 = resourse fields
      * 2 = village inner view (buildings)
+     * 3 = market
      * @param windowId new window state Id
      * @param driver WebDriver of window
      */
@@ -113,6 +117,12 @@ public class CurrentExp {
                     Engine.w8alittle();
                     changeWindow( windowId, driver );
                 }
+            case 3:
+                int oid = getBuildingId( "Рынок" );
+                driver.get( "http://ts2.travian.ru/build.php?id="+oid );
+                break;
+            default:
+                System.out.println("CurrentExp.changeWindow index out of range");
         }
     }
 
@@ -132,5 +142,15 @@ public class CurrentExp {
 
     public int getCurrentWindow(){
         return currentWindow;
+    }
+
+    /**
+     * Gest building id in currentVillage
+     * @param buildName name of building to find
+     * @return it`s id
+     */
+    private int getBuildingId( String buildName){
+        List<Building> builds = Engine.getCurrentVillage().getBuildings();
+        return builds.stream().filter( b -> b.getName().equals( buildName ) ).findFirst().get().getSlotId();
     }
 }

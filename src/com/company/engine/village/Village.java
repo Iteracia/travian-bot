@@ -3,6 +3,8 @@ package com.company.engine.village;
 import com.company.Settings;
 import com.company.engine.building.Building;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,9 +58,15 @@ public class Village {
         return responce.toString();
     }
 
-    public String allBuildings(){
-        StringBuilder builder = new StringBuilder(  );
-        buildings.forEach( builder::append );
-        return builder.toString();
+    public List<Building> getBuildings() {
+        return buildings;
+    }
+    private void saveBuildings(){
+        try( FileOutputStream fileOut = new FileOutputStream("./save/buildings.ser");
+             ObjectOutputStream out = new ObjectOutputStream( fileOut ) ){
+            out.writeObject( buildings );
+        }catch ( Exception e ){
+
+        }
     }
 }

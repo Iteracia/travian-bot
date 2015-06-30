@@ -5,7 +5,7 @@ import java.io.*;
 public class Settings {
     public static String login;
     public static String password;
-    public static final boolean printAllBuildings = true;
+    public static final boolean printAllBuildings = false;
 
     static {
         File info = new File( "./settings.txt" );

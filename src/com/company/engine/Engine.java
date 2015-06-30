@@ -67,9 +67,9 @@ public class Engine {
     public static void login( WebDriver driver ){
         driver.get("http://ts2.travian.ru");
         WebElement loginInput = driver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/div[1]/form/table/tbody/tr[1]/td[2]/input"));
-        loginInput.sendKeys(Settings.login);
+        loginInput.sendKeys( Settings.login );
         WebElement passInput = driver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/div[1]/form/table/tbody/tr[2]/td[2]/input"));
-        passInput.sendKeys(Settings.password);
+        passInput.sendKeys( Settings.password );
         WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"s1\"]"));
         w8alittle();
         loginButton.click();

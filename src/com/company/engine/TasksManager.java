@@ -1,5 +1,7 @@
 package com.company.engine;
 
+import com.company.engine.building.Market;
+
 public class TasksManager {
     public static Task manage (String type,String id) throws IndexOutOfBoundsException{
         switch ( type ) {
@@ -38,7 +40,13 @@ public class TasksManager {
                 }
             case "Market" :
                 switch ( id ){
-
+                    case "2":
+                        return new Task() {
+                            @Override
+                            public void run() {
+                                Market.enterMarketWindow( driver );
+                            }
+                        };
                 }
             case "Barraks" :
                 switch ( id ){

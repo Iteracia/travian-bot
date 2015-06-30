@@ -35,9 +35,9 @@ public class Executor implements Runnable{
         Engine.login( localDriver );
         analyzeAndExecuteDefault();
 
-        //analyzeCommands();
-        //execute();
-
+        analyzeCommands();
+        execute();
+        read();
         Engine.closeDrivers();
     }
 
@@ -85,5 +85,11 @@ public class Executor implements Runnable{
             System.out.println("executor.analyzeCommands error");
             e.printStackTrace();
         }
+    }
+
+    private void read(){
+        try{
+            System.in.read();
+        }catch ( Exception e ){}
     }
 }
