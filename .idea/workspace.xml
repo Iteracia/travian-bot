@@ -2,44 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="831afa30-4618-4b37-ba07-5267762ad9b3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/engine/building/Building.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/engine/building/Market.java" />
-      <change type="DELETED" beforePath="C:\travian\out\production\travian\com\company\engine\building$1.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\travian\out\production\travian\com\company\engine\building$Builder.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\travian\out\production\travian\com\company\engine\building.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\travian\out\production\travian\com\company\engine\buildings\market.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\travian\out\production\travian\com\company\engine\village\building$1.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\travian\out\production\travian\com\company\engine\village\building$Builder.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\travian\out\production\travian\com\company\engine\village\building.class" afterPath="" />
-      <change type="DELETED" beforePath="C:\travian\src\com\company\engine\building.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\travian\src\com\company\engine\buildings\market.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\travian\src\com\company\engine\village\building.java" afterPath="" />
-      <change type="MOVED" beforePath="C:\travian\out\production\travian\com\company\engine\currentExp.class" afterPath="$PROJECT_DIR$/out/production/travian/com/company/engine/CurrentExp.class" />
-      <change type="MOVED" beforePath="C:\travian\out\production\travian\com\company\engine\executor.class" afterPath="$PROJECT_DIR$/out/production/travian/com/company/engine/Executor.class" />
-      <change type="MOVED" beforePath="C:\travian\out\production\travian\com\company\engine\tasksManager$1.class" afterPath="$PROJECT_DIR$/out/production/travian/com/company/engine/TasksManager$1.class" />
-      <change type="MOVED" beforePath="C:\travian\out\production\travian\com\company\engine\tasksManager$2.class" afterPath="$PROJECT_DIR$/out/production/travian/com/company/engine/TasksManager$2.class" />
-      <change type="MOVED" beforePath="C:\travian\out\production\travian\com\company\engine\tasksManager$3.class" afterPath="$PROJECT_DIR$/out/production/travian/com/company/engine/TasksManager$3.class" />
-      <change type="MOVED" beforePath="C:\travian\out\production\travian\com\company\engine\tasksManager.class" afterPath="$PROJECT_DIR$/out/production/travian/com/company/engine/TasksManager.class" />
-      <change type="MOVED" beforePath="C:\travian\out\production\travian\com\company\engine\village\resources.class" afterPath="$PROJECT_DIR$/out/production/travian/com/company/engine/village/Resources.class" />
-      <change type="MOVED" beforePath="C:\travian\out\production\travian\com\company\engine\village\troops$troop.class" afterPath="$PROJECT_DIR$/out/production/travian/com/company/engine/village/Troops$troop.class" />
-      <change type="MOVED" beforePath="C:\travian\out\production\travian\com\company\engine\village\troops.class" afterPath="$PROJECT_DIR$/out/production/travian/com/company/engine/village/Troops.class" />
-      <change type="MOVED" beforePath="C:\travian\out\production\travian\com\company\engine\village\village.class" afterPath="$PROJECT_DIR$/out/production/travian/com/company/engine/village/Village.class" />
-      <change type="MOVED" beforePath="C:\travian\src\com\company\engine\currentExp.java" afterPath="$PROJECT_DIR$/src/com/company/engine/CurrentExp.java" />
-      <change type="MOVED" beforePath="C:\travian\src\com\company\engine\executor.java" afterPath="$PROJECT_DIR$/src/com/company/engine/Executor.java" />
-      <change type="MOVED" beforePath="C:\travian\src\com\company\engine\tasksManager.java" afterPath="$PROJECT_DIR$/src/com/company/engine/TasksManager.java" />
-      <change type="MOVED" beforePath="C:\travian\src\com\company\engine\village\resources.java" afterPath="$PROJECT_DIR$/src/com/company/engine/village/Resources.java" />
-      <change type="MOVED" beforePath="C:\travian\src\com\company\engine\village\troops.java" afterPath="$PROJECT_DIR$/src/com/company/engine/village/Troops.java" />
-      <change type="MOVED" beforePath="C:\travian\src\com\company\engine\village\village.java" afterPath="$PROJECT_DIR$/src/com/company/engine/village/Village.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/travian/com/company/engine/Engine.class" afterPath="$PROJECT_DIR$/out/production/travian/com/company/engine/Engine.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/travian/com/company/Main.class" afterPath="$PROJECT_DIR$/out/production/travian/com/company/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/travian/com/company/engine/Task.class" afterPath="$PROJECT_DIR$/out/production/travian/com/company/engine/Task.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/engine/Engine.java" afterPath="$PROJECT_DIR$/src/com/company/engine/Engine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Main.java" afterPath="$PROJECT_DIR$/src/com/company/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Settings.java" afterPath="$PROJECT_DIR$/src/com/company/Settings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/engine/Task.java" afterPath="$PROJECT_DIR$/src/com/company/engine/Task.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/commandsInfo.txt" afterPath="$PROJECT_DIR$/commandsInfo.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/defaultCommands.xml" afterPath="$PROJECT_DIR$/defaultCommands.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/company/Settings.java" />
+      <change type="DELETED" beforePath="C:\travian\out\production\travian\com\company\Settings.class" afterPath="" />
+      <change type="DELETED" beforePath="C:\travian\out\production\travian\com\company\engine\Engine.class" afterPath="" />
+      <change type="DELETED" beforePath="C:\travian\out\production\travian\com\company\engine\TasksManager$4.class" afterPath="" />
+      <change type="DELETED" beforePath="C:\travian\out\production\travian\com\company\engine\building\Building$1.class" afterPath="" />
+      <change type="DELETED" beforePath="C:\travian\out\production\travian\com\company\engine\building\Building$Builder.class" afterPath="" />
+      <change type="DELETED" beforePath="C:\travian\out\production\travian\com\company\engine\building\Building.class" afterPath="" />
+      <change type="DELETED" beforePath="C:\travian\out\production\travian\com\company\engine\currentExp.class" afterPath="" />
+      <change type="DELETED" beforePath="C:\travian\out\production\travian\com\company\engine\executor.class" afterPath="" />
+      <change type="DELETED" beforePath="C:\travian\out\production\travian\com\company\engine\tasksManager$1.class" afterPath="" />
+      <change type="DELETED" beforePath="C:\travian\out\production\travian\com\company\engine\tasksManager$2.class" afterPath="" />
+      <change type="DELETED" beforePath="C:\travian\out\production\travian\com\company\engine\tasksManager$3.class" afterPath="" />
+      <change type="DELETED" beforePath="C:\travian\out\production\travian\com\company\engine\tasksManager.class" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="travian.iws" />
@@ -68,13 +44,23 @@
       <file leaf-file-name="Engine.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/engine/Engine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1738" max-vertical-offset="3549">
-              <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1215" max-vertical-offset="3549">
+              <caret line="69" column="28" selection-start-line="69" selection-start-column="28" selection-end-line="69" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#7522#7523#0" expanded="true" />
                 <element signature="e#7593#7594#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Settings.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/company/Settings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.24324325" vertical-offset="0" max-vertical-offset="567">
+              <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -92,17 +78,17 @@
       <file leaf-file-name="Village.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/engine/village/Village.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="688" max-vertical-offset="1176">
-              <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="599" max-vertical-offset="1176">
+              <caret line="51" column="39" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Building.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Building.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/engine/building/Building.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7375" vertical-offset="1178" max-vertical-offset="2058">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1178" max-vertical-offset="2058">
               <caret line="111" column="82" selection-start-line="111" selection-start-column="82" selection-end-line="111" selection-end-column="82" />
               <folding />
             </state>
@@ -115,18 +101,6 @@
             <state vertical-scroll-proportion="0.0" vertical-offset="199" max-vertical-offset="1239">
               <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Task.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/engine/Task.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="441">
-              <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -152,16 +126,6 @@
                 <element signature="e#674#675#0" expanded="true" />
                 <element signature="e#781#782#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Settings.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/Settings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="273">
-              <caret line="5" column="57" selection-start-line="5" selection-start-column="57" selection-end-line="5" selection-end-column="57" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -217,10 +181,10 @@
         <option value="$PROJECT_DIR$/src/com/company/engine/TasksManager.java" />
         <option value="$PROJECT_DIR$/src/com/company/engine/Executor.java" />
         <option value="$PROJECT_DIR$/commandsInfo.txt" />
-        <option value="$PROJECT_DIR$/src/com/company/Settings.java" />
         <option value="$PROJECT_DIR$/src/com/company/engine/village/Village.java" />
         <option value="$PROJECT_DIR$/src/com/company/engine/village/Resources.java" />
         <option value="$PROJECT_DIR$/src/com/company/engine/building/Building.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Settings.java" />
       </list>
     </option>
   </component>
@@ -650,7 +614,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="0" width="1696" height="1026" extended-state="1" />
+    <frame x="-4" y="0" width="1696" height="1026" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
@@ -664,7 +628,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40716612" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.40716612" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18520783" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -721,14 +685,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/company/Settings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="147" max-vertical-offset="315">
-          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="42" max-vertical-offset="588">
@@ -768,14 +724,6 @@
             <element signature="e#4631#4632#0" expanded="true" />
             <element signature="e#4667#4668#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Settings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="147" max-vertical-offset="315">
-          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -821,14 +769,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Settings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="147" max-vertical-offset="315">
-          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="567">
@@ -871,14 +811,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Settings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="147" max-vertical-offset="315">
-          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="359" max-vertical-offset="1239">
@@ -910,14 +842,6 @@
             <element signature="e#4631#4632#0" expanded="true" />
             <element signature="e#4667#4668#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Settings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="147" max-vertical-offset="315">
-          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1122,14 +1046,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Settings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="273">
-          <caret line="5" column="57" selection-start-line="5" selection-start-column="57" selection-end-line="5" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/engine/CurrentExp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="2898">
@@ -1143,26 +1059,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/engine/Engine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1738" max-vertical-offset="3549">
-          <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#7522#7523#0" expanded="true" />
-            <element signature="e#7593#7594#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/engine/village/Village.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="688" max-vertical-offset="1176">
-          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/engine/village/Resources.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="199" max-vertical-offset="1239">
@@ -1173,8 +1069,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/engine/building/Building.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7375" vertical-offset="1178" max-vertical-offset="2058">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1178" max-vertical-offset="2058">
           <caret line="111" column="82" selection-start-line="111" selection-start-column="82" selection-end-line="111" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="590">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/engine/Engine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1215" max-vertical-offset="3549">
+          <caret line="69" column="28" selection-start-line="69" selection-start-column="28" selection-end-line="69" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#7522#7523#0" expanded="true" />
+            <element signature="e#7593#7594#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/engine/village/Village.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="599" max-vertical-offset="1176">
+          <caret line="51" column="39" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Settings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24324325" vertical-offset="0" max-vertical-offset="567">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
           <folding />
         </state>
       </provider>
