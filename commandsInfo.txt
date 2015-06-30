@@ -3,6 +3,10 @@
 2 - VillageBuildings
 3 - Troops
 4 - Slots
+10 - load
+
+<= Load =>
+analyze index
 
 <= Market =>
 1 - upgrade

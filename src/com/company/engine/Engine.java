@@ -81,11 +81,12 @@ public class Engine {
         List<WebElement> expanList = driver.findElements(By.xpath("//*[@id=\"sidebarBoxVillagelist\"]/div[2]/div[2]/ul/li"));
         expanList.forEach( expDiv -> {
             String expname = expDiv.getText();
-            expname = expname.replace("\n","").replace("\u202D","").replace("\u202C","");
-            expansNames.add(expname);
-            Village newV = new Village(expname);
+            expname = expname.replace( "\n", "" ).replace( "\u202D", "" ).replace( "\u202C", "" );
+            expansNames.add( expname );
+            Village newV = new Village( expname );
             villages.add( newV );
-        });
+        } );
+        Saver.saveExpsNames();
         for (int i = 0; i < expansNames.size(); i++) {
             CurrentExp.ince().changeExp(i+1, driver);
             tasks.forEach( task -> task.driver(driver).run() );
@@ -144,6 +145,9 @@ public class Engine {
             }else {
                 //todo
             }
+        }
+        if ( CurrentExp.ince().getCvindex() == expansNames.size() ) {
+            Saver.saveBuildings();
         }
         CurrentExp.ince().changeWindow( windowId, driver );
     }

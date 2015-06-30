@@ -1,8 +1,10 @@
 package com.company.engine.building;
 
-public class Building {
-    private long timeLeftSecs;
-    private String timeLeftStr;
+import java.io.Serializable;
+
+public class Building implements Serializable{
+    private transient long timeLeftSecs;
+    private transient String timeLeftStr;
     private boolean inProgress;
     private String name;
     private int level;

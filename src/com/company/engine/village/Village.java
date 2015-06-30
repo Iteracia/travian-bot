@@ -61,12 +61,8 @@ public class Village {
     public List<Building> getBuildings() {
         return buildings;
     }
-    private void saveBuildings(){
-        try( FileOutputStream fileOut = new FileOutputStream("./save/buildings.ser");
-             ObjectOutputStream out = new ObjectOutputStream( fileOut ) ){
-            out.writeObject( buildings );
-        }catch ( Exception e ){
 
-        }
+    public void setBuildings( List<Building> buildings ) {
+        this.buildings = buildings;
     }
 }

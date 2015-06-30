@@ -36,7 +36,7 @@ public class TasksManager {
                             }
                         };
                     default:
-                        throw new IndexOutOfBoundsException( "id index out of range" );
+                        throw new IndexOutOfBoundsException( "id analyze index out of range" );
                 }
             case "Market" :
                 switch ( id ){
@@ -51,6 +51,18 @@ public class TasksManager {
             case "Barraks" :
                 switch ( id ){
 
+                }
+            case "Load" :
+                switch ( id ){
+                    case "4":
+                        return new Task() {
+                            @Override
+                            public void run() {
+                                Saver.LoadBuildings();
+                            }
+                        };
+                    default:
+                        throw new IndexOutOfBoundsException( "id load index out of range" );
                 }
             default:
                 throw new IndexOutOfBoundsException( "type index out of range" );
