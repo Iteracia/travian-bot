@@ -5,12 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class currentExp {
-    private static currentExp ourInstance = new currentExp();
-    public static currentExp ince() {
+public class CurrentExp {
+    private static CurrentExp ourInstance = new CurrentExp();
+    public static CurrentExp ince() {
         return ourInstance;
     }
-    private currentExp() {
+    private CurrentExp() {
     }
     private final long w8timeout = 10000;
 
@@ -98,6 +98,7 @@ public class currentExp {
                     Engine.w8alittle();
                     break;
                 }else {
+                    Engine.w8alittle();
                     changeWindow( windowId, driver );
                 }
             case 2:
@@ -109,6 +110,7 @@ public class currentExp {
                     Engine.w8alittle();
                     break;
                 }else {
+                    Engine.w8alittle();
                     changeWindow( windowId, driver );
                 }
         }
@@ -126,5 +128,9 @@ public class currentExp {
             }
         }
         return false;
+    }
+
+    public int getCurrentWindow(){
+        return currentWindow;
     }
 }

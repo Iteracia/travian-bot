@@ -1,9 +1,9 @@
 package com.company.engine;
 
 import com.company.Settings;
-import com.company.engine.village.building;
-import com.company.engine.village.resources;
-import com.company.engine.village.village;
+import com.company.engine.building.Building;
+import com.company.engine.village.Resources;
+import com.company.engine.village.Village;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,7 +18,7 @@ public class Engine {
     public static List<String> expansNames = new ArrayList<>();
     public static List<WebDriver> drivers = new ArrayList<>();
     public static WebDriverWait wait;
-    public static List<village> villages = new ArrayList<>();
+    public static List<Village> villages = new ArrayList<>();
     private static boolean initialised = false;
 
     public static void addExp(String expand){
@@ -77,37 +77,31 @@ public class Engine {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"villageNameField\"]")));
     }
 
-    public static void analyzeExps( WebDriver driver ){
+    public static void analyzeExps( WebDriver driver, List<Task> tasks ){
         List<WebElement> expanList = driver.findElements(By.xpath("//*[@id=\"sidebarBoxVillagelist\"]/div[2]/div[2]/ul/li"));
         expanList.forEach( expDiv -> {
             String expname = expDiv.getText();
             expname = expname.replace("\n","").replace("\u202D","").replace("\u202C","");
             expansNames.add(expname);
-            village newV = new village(expname);
+            Village newV = new Village(expname);
             villages.add( newV );
         });
         for (int i = 0; i < expansNames.size(); i++) {
-            currentExp.ince().changeExp(i+1, driver);
-            analyzeVillage( driver );
+            CurrentExp.ince().changeExp(i+1, driver);
+            tasks.forEach( task -> task.driver(driver).run() );
             System.out.println( getCurrentVillage() );
         }
     }
 
-    private static void analyzeVillage( WebDriver driver ){
-        //ananyleResources( driver );
-        analyzeVillageBuildings( driver );
-        analyzeTroops( driver );
-    }
-
-    public static void analyzeVillageBuildings( WebDriver driver ){
-        if ( driver.findElements(By.xpath("//*[@id=\"content\"]/div[2]/div[10]/ul/li")).size()>0 && currentExp.ince().checkWindow(1,2)){
+    public static void analyzeVillageBuildingsInP( WebDriver driver ){
+        if ( driver.findElements(By.xpath("//*[@id=\"content\"]/div[2]/div[10]/ul/li")).size()>0 && CurrentExp.ince().checkWindow(1,2)){
             List<WebElement> builds = driver.findElements(By.xpath("//*[@id=\"content\"]/div[2]/div[10]/ul/li"));
             builds.forEach( element -> {
                 String divText = element.findElement(By.xpath("./div[1]")).getText();
                 String name = divText.substring(0, divText.indexOf("Уровень")-1);
                 String level = divText.substring( divText.indexOf("Уровень")+8);
                 String timeLeft = element.findElement(By.xpath("./div[2]/span")).getText();
-                building build = building.Builder.ince().level(Integer.parseInt(level)).name(name).timeLeft(timeLeft).build();
+                Building build = Building.Builder.ince().level(Integer.parseInt(level)).name(name).timeLeft(timeLeft).build();
                 getCurrentVillage().addBInProc( build );
             } );
         }
@@ -118,12 +112,44 @@ public class Engine {
         Float clay  = Float.parseFloat( driver.findElement(By.xpath("//*[@id=\"l2\"]")).getText() );
         Float iron  = Float.parseFloat( driver.findElement(By.xpath("//*[@id=\"l3\"]")).getText() );
         Float grain = Float.parseFloat( driver.findElement(By.xpath("//*[@id=\"l4\"]")).getText() );
-        village villageInfo = getCurrentVillage();
-        villageInfo.resources().set(new resources(wood, clay, iron, grain));
+        Village villageInfo = getCurrentVillage();
+        villageInfo.resources().set(new Resources(wood, clay, iron, grain));
+    }
+
+    /**
+     * Analyzes slotss for buildings(resource fields and buildings)
+     */
+    public static void analyzeSlots( WebDriver driver){
+        int windowId = CurrentExp.ince().getCurrentWindow();
+        // resource fields
+        if ( !CurrentExp.ince().checkWindow( 1 ) ){
+            CurrentExp.ince().changeWindow( 1, driver );
+        }
+        for ( int i = 1; i < 19; i++ ) {
+            String elementValue = driver.findElement( By.xpath( "//*[@id=\"rx\"]/area["+i+"]" ) ).getAttribute( "alt" );
+            String name = elementValue.substring( 0, elementValue.indexOf("Уровень")-1 );
+            String level = elementValue.substring( elementValue.indexOf("Уровень")+8 );
+            Building building = Building.Builder.ince().level( Integer.parseInt( level ) ).name( name ).slotId( i ).build();
+            getCurrentVillage().addBuilding( building );
+        }
+        // buildings
+        CurrentExp.ince().changeWindow( 2, driver );
+        for ( int i = 1; i < 23; i++ ) {
+            String elementValue = driver.findElement( By.xpath( "//*[@id=\"clickareas\"]/area["+i+"]" ) ).getAttribute( "alt" );
+            if ( !elementValue.equals( "Стройплощадка" )) {
+                String name = elementValue.substring( 0, elementValue.indexOf( "<span" ) - 1 );
+                String level = elementValue.substring( elementValue.indexOf( "Уровень" ) + 8, elementValue.indexOf( "</span" ) );
+                Building building = Building.Builder.ince().level( Integer.parseInt( level ) ).name( name ).slotId( i + 18 ).build();
+                getCurrentVillage().addBuilding( building );
+            }else {
+                //todo
+            }
+        }
+        CurrentExp.ince().changeWindow( windowId, driver );
     }
 
     public static void analyzeTroops( WebDriver driver ){
-        if ( driver.findElements(By.xpath("//*[@id=\"troops\"]/tbody/tr")).size() >0 && currentExp.ince().checkWindow(1) ){
+        if ( driver.findElements(By.xpath("//*[@id=\"troops\"]/tbody/tr")).size() >0 && CurrentExp.ince().checkWindow(1) ){
             List<WebElement> elements = driver.findElements(By.xpath("//*[@id=\"troops\"]/tbody/tr"));
             elements.forEach( element -> {
                 int count = Integer.parseInt( element.findElement(By.xpath("./td[2]")).getText() );
@@ -133,7 +159,7 @@ public class Engine {
         }
     }
 
-    public static village getCurrentVillage(){
-        return villages.get( currentExp.ince().getCvindex()-1 );
+    public static Village getCurrentVillage(){
+        return villages.get( CurrentExp.ince().getCvindex()-1 );
     }
 }

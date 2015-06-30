@@ -2,6 +2,7 @@
 1 - Resources
 2 - VillageBuildings
 3 - Troops
+4 - Slots
 
 <= Market =>
 1 - upgrade

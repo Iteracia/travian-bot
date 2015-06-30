@@ -4,4 +4,5 @@
     <command type="Analyze" id="1"/>
     <command type="Analyze" id="2"/>
     <command type="Analyze" id="3"/>
+    <command type="Analyze" id="4"/>
 </commands>

@@ -1,6 +1,6 @@
 package com.company.engine;
 
-public class tasksManager {
+public class TasksManager {
     public static Task manage (String type,String id) throws IndexOutOfBoundsException{
         switch ( type ) {
             case "Analyze" :
@@ -16,7 +16,7 @@ public class tasksManager {
                         return new Task() {
                             @Override
                             public void run() {
-                                Engine.analyzeVillageBuildings( driver );
+                                Engine.analyzeVillageBuildingsInP( driver );
                             }
                         };
                     case "3":
@@ -24,6 +24,13 @@ public class tasksManager {
                             @Override
                             public void run() {
                                 Engine.analyzeTroops( driver );
+                            }
+                        };
+                    case "4":
+                        return new Task() {
+                            @Override
+                            public void run() {
+                                Engine.analyzeSlots( driver );
                             }
                         };
                     default:

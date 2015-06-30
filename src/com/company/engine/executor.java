@@ -12,16 +12,16 @@ import org.openqa.selenium.WebDriver;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-public class executor implements Runnable{
-    private static executor ourInstance = new executor();
-    public static executor ince() {
+public class Executor implements Runnable{
+    private static Executor ourInstance = new Executor();
+    public static Executor ince() {
         return ourInstance;
     }
     private final long updateDelta; // delta time before ask whether the executeList is empty
     private static List<Task> tasks = new ArrayList<>();
     private final WebDriver localDriver;
 
-    private executor() {
+    private Executor() {
         Engine.init();
         localDriver = Engine.newDriver();
         updateDelta = 1000;
@@ -33,9 +33,10 @@ public class executor implements Runnable{
     @Override
     public void run() {
         Engine.login( localDriver );
-        Engine.analyzeExps( localDriver );
-        analyzeDefault();
-        execute();
+        analyzeAndExecuteDefault();
+
+        //analyzeCommands();
+        //execute();
 
         Engine.closeDrivers();
     }
@@ -47,7 +48,7 @@ public class executor implements Runnable{
         } );
     }
 
-    private void analyzeDefault(){
+    private void analyzeAndExecuteDefault(){
         try {
             File defaultTasks = new File( "defaultCommands.xml" );
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -56,9 +57,10 @@ public class executor implements Runnable{
             doc.getDocumentElement().normalize();
             List<Node> commands = NodeListWrapper.takeThis( doc.getElementsByTagName( "command" ) );
             commands.forEach( node -> {
-                Task newTask = tasksManager.manage( node.getAttributes().getNamedItem( "type" ).getNodeValue() ,node.getAttributes().getNamedItem( "id" ).getNodeValue() );
+                Task newTask = TasksManager.manage( node.getAttributes().getNamedItem( "type" ).getNodeValue(), node.getAttributes().getNamedItem( "id" ).getNodeValue() );
                 tasks.add( newTask );
             });
+            Engine.analyzeExps( localDriver, tasks );
         }catch ( Exception e ){
             System.out.println("executor.analyzeDefault error");
             e.printStackTrace();
@@ -74,7 +76,7 @@ public class executor implements Runnable{
             doc.getDocumentElement().normalize();
             List<Node> commands = NodeListWrapper.takeThis( doc.getElementsByTagName( "command" ) );
             commands.forEach( node -> {
-                Task newTask = tasksManager.manage( node.getAttributes().getNamedItem( "type" ).getNodeValue() ,node.getAttributes().getNamedItem( "id" ).getNodeValue() );
+                Task newTask = TasksManager.manage( node.getAttributes().getNamedItem( "type" ).getNodeValue(), node.getAttributes().getNamedItem( "id" ).getNodeValue() );
                 if ( newTask!=null ) {
                     tasks.add( newTask );
                 }

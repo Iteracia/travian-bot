@@ -1,26 +1,33 @@
 package com.company.engine.village;
 
+import com.company.Settings;
+import com.company.engine.building.Building;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class village {
+public class Village {
     private String name;
-    private resources resourcesLink = new resources();
-    private troops troopsLink = new troops();
-    private List<building> buildsInProgress = new ArrayList<>();
+    private Resources resourcesLink = new Resources();
+    private Troops troopsLink = new Troops();
+    private List<Building> buildsInProgress = new ArrayList<>();
+    private List<Building> buildings = new ArrayList<>( 38 );
 
-    public village( String name ){
+    public Village( String name ){
         this.name = name;
     }
-    public resources resources(){
+    public Resources resources(){
         return resourcesLink;
     }
-    public troops troops(){
+    public Troops troops(){
         return troopsLink;
     }
 
-    public void addBInProc( building building){
+    public void addBInProc( Building building ){
         buildsInProgress.add( building );
+    }
+    public void addBuilding( Building building ){
+        buildings.add( building );
     }
 
     @Override
@@ -36,12 +43,22 @@ public class village {
         }
         if (buildsInProgress.size()>0) {
             responce.append(" = Buildings in progress = \n");
-            buildsInProgress.forEach(responce::append);
+            buildsInProgress.forEach( responce::append );
         }
         if (!troopsLink.isEmpty()){
             responce.append(" = Army = \n");
             responce.append( troopsLink.toString() );
         }
+        if ( Settings.printAllBuildings ){
+            responce.append( " = All Buildings = " );
+            buildings.forEach( responce::append );
+        }
         return responce.toString();
+    }
+
+    public String allBuildings(){
+        StringBuilder builder = new StringBuilder(  );
+        buildings.forEach( builder::append );
+        return builder.toString();
     }
 }

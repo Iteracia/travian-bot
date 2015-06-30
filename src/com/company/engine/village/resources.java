@@ -1,20 +1,20 @@
 package com.company.engine.village;
 
-public class resources {
+public class Resources {
     private float wood;
     private float clay;
     private float iron;
     private float grain;
     private boolean isSet;
 
-    public resources(){
+    public Resources(){
         this.wood = 0;
         this.clay = 0;
         this.iron = 0;
         this.grain = 0;
         isSet = false;
     }
-    public resources(float wood, float clay, float iron, float grain) {
+    public Resources( float wood, float clay, float iron, float grain ) {
         this.wood = wood;
         this.clay = clay;
         this.iron = iron;
@@ -22,11 +22,12 @@ public class resources {
         isSet = true;
     }
 
-    public void set(resources reses){
+    public void set(Resources reses){
         this.wood = reses.wood;
         this.clay = reses.clay;
         this.iron = reses.iron;
         this.grain = reses.grain;
+        isSet = true;
     }
 
     public boolean isSet() {

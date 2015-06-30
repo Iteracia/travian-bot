@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class troops {
+public class Troops {
     /*
      * Inner helper class
      */
