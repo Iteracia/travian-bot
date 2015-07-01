@@ -88,6 +88,7 @@ public class CurrentExp {
      * 1 = resourse fields
      * 2 = village inner view (buildings)
      * 3 = market
+     * 4 = rally point
      * @param windowId new window state Id
      * @param driver WebDriver of window
      */
@@ -119,6 +120,10 @@ public class CurrentExp {
                 }
             case 3:
                 int oid = getBuildingId( "Рынок" );
+                driver.get( "http://ts2.travian.ru/build.php?id="+oid );
+                break;
+            case 4:
+                oid = getBuildingId( "Пункт сбора" );
                 driver.get( "http://ts2.travian.ru/build.php?id="+oid );
                 break;
             default:

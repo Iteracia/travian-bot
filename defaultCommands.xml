@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <commands xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="./resources/command.xsd">
-    <command type="Analyze" id="1" tip="Res"/>
+    <!--Commands applied for each village on start-->
+    <!--<command type="Analyze" id="1" tip="Res"/>-->
     <!--<command type="Analyze" id="2" tip="VillageBuildings"/>-->
     <!--<command type="Analyze" id="3" tip="Troops"/>-->
     <!--<command type="Analyze" id="4" tip="Slots"/>-->
-    <command id="4" type="Load"/>
 </commands>

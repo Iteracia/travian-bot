@@ -14,13 +14,18 @@ public class Troops {
         private Integer type;
         private String name;
 
-        public troop( int count, String name ){
+        troop( int count, String name ){
             this.count = count;
             this.name = name;
             this.type = troopNameMap.getV( name );
             if ( this.type == null){
                 this.type = -1;
             }
+        }
+        troop( int count, int id){
+            this.count = count;
+            this.name = troopNameMap.getK( id );
+            this.type = id;
         }
 
         @Override
@@ -38,15 +43,25 @@ public class Troops {
 
 
     static {
-        troopNameMap.put( "Герой",1 );
-        troopNameMap.put( "Легионеров",2 );
-        troopNameMap.put( "Преторианцев",3 );
-        troopNameMap.put( "Империанцев",4 );
+        troopNameMap.put( "Герой",11 );
+        troopNameMap.put( "Легионеров",1 );
+        troopNameMap.put( "Преторианцев",2 );
+        troopNameMap.put( "Империанцев",3 );
+        troopNameMap.put( "Конных разведчиков",4 );
+        troopNameMap.put( "Конниц императора",5 );
+        troopNameMap.put( "Конниц Цезаря",6 );
+        troopNameMap.put( "Таранов",7 );
+        troopNameMap.put( "Огненных катапульт",8 );
+        troopNameMap.put( "Сенаторов",9 );
+        troopNameMap.put( "Поселенцев",10 );
     }
 
 
     public void addTroop( int count, String name){
         army.add( new troop( count, name ) );
+    }
+    public void addTroop( int count, int id){
+        army.add( new troop( count, id ) );
     }
 
     public boolean isEmpty(){

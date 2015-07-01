@@ -8,6 +8,7 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 
+import com.company.engine.building.Rallypoint;
 import org.openqa.selenium.WebDriver;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -34,9 +35,8 @@ public class Executor implements Runnable{
     public void run() {
         Engine.login( localDriver );
         analyzeAndExecuteDefault();
-
+        loadCommands();
         analyzeCommands();
-        execute();
         read();
         Engine.closeDrivers();
     }
@@ -46,6 +46,23 @@ public class Executor implements Runnable{
             task.driver = localDriver;
             task.run();
         } );
+    }
+
+    private void loadCommands(){
+        try {
+            File loads = new File( "loadCommands.xml" );
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse( loads );
+            doc.getDocumentElement().normalize();
+            List<Node> commands = NodeListWrapper.takeThis( doc.getElementsByTagName( "command" ) );
+            commands.forEach( node -> {
+                Task newTask = TasksManager.manage( node.getAttributes().getNamedItem( "type" ).getNodeValue(), node.getAttributes().getNamedItem( "id" ).getNodeValue() );
+                newTask.driver( localDriver ).run();
+            } );
+        }catch ( Exception e ){
+            System.out.println( "executor.loadCommands error" );
+        }
     }
 
     private void analyzeAndExecuteDefault(){
@@ -61,6 +78,7 @@ public class Executor implements Runnable{
                 tasks.add( newTask );
             });
             Engine.analyzeExps( localDriver, tasks );
+            tasks.clear();
         }catch ( Exception e ){
             System.out.println("executor.analyzeDefault error");
             e.printStackTrace();
@@ -81,6 +99,7 @@ public class Executor implements Runnable{
                     tasks.add( newTask );
                 }
             });
+            execute();
         }catch ( Exception e ){
             System.out.println("executor.analyzeCommands error");
             e.printStackTrace();

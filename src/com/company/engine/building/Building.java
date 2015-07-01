@@ -9,6 +9,7 @@ public class Building implements Serializable{
     private String name;
     private int level;
     private int slotId;
+    private boolean freeSlot;
     private Building( long time, String timeStr, String name, int level, int slot, boolean inProgress ){
         timeLeftSecs = time;
         timeLeftStr = timeStr;

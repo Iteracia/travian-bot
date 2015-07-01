@@ -87,10 +87,12 @@ public class Engine {
             villages.add( newV );
         } );
         Saver.saveExpsNames();
-        for (int i = 0; i < expansNames.size(); i++) {
-            CurrentExp.ince().changeExp(i+1, driver);
-            tasks.forEach( task -> task.driver(driver).run() );
-            System.out.println( getCurrentVillage() );
+        if (tasks.size() > 0) {
+            for ( int i = 0; i < expansNames.size(); i++ ) {
+                CurrentExp.ince().changeExp( i + 1, driver );
+                tasks.forEach( task -> task.driver( driver ).run() );
+                System.out.println( getCurrentVillage() );
+            }
         }
     }
 
@@ -118,7 +120,7 @@ public class Engine {
     }
 
     /**
-     * Analyzes slotss for buildings(resource fields and buildings)
+     * Analyzes slots for buildings(resource fields and buildings)
      */
     public static void analyzeSlots( WebDriver driver){
         int windowId = CurrentExp.ince().getCurrentWindow();
@@ -146,13 +148,32 @@ public class Engine {
                 //todo
             }
         }
-        if ( CurrentExp.ince().getCvindex() == expansNames.size() ) {
+        if ( lastVillageAn() ) {
             Saver.saveBuildings();
         }
         CurrentExp.ince().changeWindow( windowId, driver );
     }
 
     public static void analyzeTroops( WebDriver driver ){
+        CurrentExp.ince().changeExp( 1, driver );
+        driver.get( "http://ts2.travian.ru/build.php?tt=1&gid=16" );
+//        List<WebElement> tables = driver.findElements( By.xpath( "//*[@id=\"build\"]/div[5]/table" ) );
+//        tables.forEach( table -> {
+//            List<WebElement> troops = driver.findElements( By.xpath( "//*[@id=\"build\"]/div[5]/table[1]/tbody[2]/tr/td" ));
+//            for ( int i = 0; i < troops.size(); i++ ) {
+//
+//            }
+//        } );
+        // todo test
+        for ( int i = 1; i < 12; i++ ) {
+            List<WebElement> unitsOneType = driver.findElements( By.xpath( "//*[@id=\\\"build\\\"]/div[5]/table[1]/tbody[2]/tr/td["+i+"]" ));
+            int count = 0;
+            for ( WebElement unit : unitsOneType ) {
+                count += Integer.parseInt( unit.getText() );
+            }
+            getCurrentVillage().troops().addTroop( count, i );
+        }
+        /*
         if ( driver.findElements(By.xpath("//*[@id=\"troops\"]/tbody/tr")).size() >0 && CurrentExp.ince().checkWindow(1) ){
             List<WebElement> elements = driver.findElements(By.xpath("//*[@id=\"troops\"]/tbody/tr"));
             elements.forEach( element -> {
@@ -160,7 +181,11 @@ public class Engine {
                 String type = element.findElement(By.xpath("./td[3]")).getText();
                 getCurrentVillage().troops().addTroop( count, type );
             });
-        }
+        }*/
+    }
+
+    private static boolean lastVillageAn(){
+        return CurrentExp.ince().getCvindex() == expansNames.size();
     }
 
     public static Village getCurrentVillage(){

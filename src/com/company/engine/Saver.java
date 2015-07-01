@@ -34,9 +34,6 @@ public class Saver {
         }
     }
     public static void LoadBuildings(){
-        if ( CurrentExp.ince().getCvindex() != Engine.villages.size() ){
-            return;
-        }
         try ( FileInputStream fileIn = new FileInputStream( "./save/buildings.ser" );
         ObjectInputStream in = new ObjectInputStream( fileIn )){
             for ( Village village : Engine.villages ) {
