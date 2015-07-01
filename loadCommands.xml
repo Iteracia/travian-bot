@@ -3,4 +3,5 @@
           xsi:noNamespaceSchemaLocation="./resources/command.xsd">
     <!--All load commands should be here-->
     <command id="4" type="Load"/>
+    <command id="3" type="Load"/>
 </commands>

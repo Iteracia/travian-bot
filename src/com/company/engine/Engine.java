@@ -155,33 +155,17 @@ public class Engine {
     }
 
     public static void analyzeTroops( WebDriver driver ){
-        CurrentExp.ince().changeExp( 1, driver );
         driver.get( "http://ts2.travian.ru/build.php?tt=1&gid=16" );
-//        List<WebElement> tables = driver.findElements( By.xpath( "//*[@id=\"build\"]/div[5]/table" ) );
-//        tables.forEach( table -> {
-//            List<WebElement> troops = driver.findElements( By.xpath( "//*[@id=\"build\"]/div[5]/table[1]/tbody[2]/tr/td" ));
-//            for ( int i = 0; i < troops.size(); i++ ) {
-//
-//            }
-//        } );
-        // todo test
-        for ( int i = 1; i < 12; i++ ) {
-            List<WebElement> unitsOneType = driver.findElements( By.xpath( "//*[@id=\\\"build\\\"]/div[5]/table[1]/tbody[2]/tr/td["+i+"]" ));
-            int count = 0;
-            for ( WebElement unit : unitsOneType ) {
-                count += Integer.parseInt( unit.getText() );
+        List<WebElement> unitsLists = driver.findElements( By.cssSelector( ".units.last" ) );
+        for ( WebElement unitsList : unitsLists ) {
+            for ( int i = 1; i < 12; i++ ) {
+                int count = Integer.parseInt( unitsList.findElement( By.xpath( "./tr/td["+i+"]" ) ).getText() );
+                getCurrentVillage().troops().addTroop( count, i);
             }
-            getCurrentVillage().troops().addTroop( count, i );
         }
-        /*
-        if ( driver.findElements(By.xpath("//*[@id=\"troops\"]/tbody/tr")).size() >0 && CurrentExp.ince().checkWindow(1) ){
-            List<WebElement> elements = driver.findElements(By.xpath("//*[@id=\"troops\"]/tbody/tr"));
-            elements.forEach( element -> {
-                int count = Integer.parseInt( element.findElement(By.xpath("./td[2]")).getText() );
-                String type = element.findElement(By.xpath("./td[3]")).getText();
-                getCurrentVillage().troops().addTroop( count, type );
-            });
-        }*/
+        if ( lastVillageAn() ) {
+            Saver.saveTroops();
+        }
     }
 
     private static boolean lastVillageAn(){

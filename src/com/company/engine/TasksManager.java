@@ -54,11 +54,18 @@ public class TasksManager {
                 }
             case "Load" :
                 switch ( id ){
+                    case "3":
+                        return new Task() {
+                            @Override
+                            public void run() {
+                                Saver.loadTroops();
+                            }
+                        };
                     case "4":
                         return new Task() {
                             @Override
                             public void run() {
-                                Saver.LoadBuildings();
+                                Saver.loadBuildings();
                             }
                         };
                     default:

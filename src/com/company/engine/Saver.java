@@ -1,6 +1,7 @@
 package com.company.engine;
 
 import com.company.engine.building.Building;
+import com.company.engine.village.Troops;
 import com.company.engine.village.Village;
 
 import java.io.FileInputStream;
@@ -33,7 +34,7 @@ public class Saver {
             e.printStackTrace();
         }
     }
-    public static void LoadBuildings(){
+    public static void loadBuildings(){
         try ( FileInputStream fileIn = new FileInputStream( "./save/buildings.ser" );
         ObjectInputStream in = new ObjectInputStream( fileIn )){
             for ( Village village : Engine.villages ) {
@@ -43,6 +44,31 @@ public class Saver {
             System.out.println("Saver.loadBuildings error");
             e.printStackTrace();
         }
+    }
 
+    public static void saveTroops(){
+        List<Village> villages = Engine.villages;
+        try (FileOutputStream fileOut = new FileOutputStream("./save/troops.ser");
+             ObjectOutputStream out = new ObjectOutputStream( fileOut )) {
+            for ( Village village : villages ) {
+                List<Troops.troop> army = village.troops().getArmy();
+                out.writeObject( army );
+            }
+        }catch ( Exception e ){
+            System.out.println("Saver.saveTroops error");
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadTroops(){
+        try ( FileInputStream fileIn = new FileInputStream( "./save/troops.ser" );
+              ObjectInputStream in = new ObjectInputStream( fileIn )){
+            for ( Village village : Engine.villages ) {
+                village.troops().setArmy( (List)in.readObject() );
+            }
+        }catch ( Exception e ){
+            System.out.println("Saver.loadTroops error");
+            e.printStackTrace();
+        }
     }
 }
