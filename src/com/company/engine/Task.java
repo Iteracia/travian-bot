@@ -7,9 +7,13 @@ import java.util.Map;
 
 public abstract class Task implements Runnable {
     WebDriver driver;
-    Map<String,String> params = new HashMap<>();
+    Map<String,String> parametress = new HashMap<>();
     public Task driver(WebDriver driver){
         this.driver = driver;
+        return this;
+    }
+    public Task params( Map<String,String> params ){
+        this.parametress = params;
         return this;
     }
 }

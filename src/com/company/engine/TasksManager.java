@@ -2,8 +2,10 @@ package com.company.engine;
 
 import com.company.engine.building.Market;
 
+import java.util.Map;
+
 public class TasksManager {
-    public static Task manage (String type,String id) throws IndexOutOfBoundsException{
+    public static Task manage (String type,String id, Map<String,String> params) throws IndexOutOfBoundsException{
         switch ( type ) {
             case "Analyze" :
                 switch ( id ) {
@@ -13,12 +15,22 @@ public class TasksManager {
                             public void run() {
                                 Engine.analyzeResources( driver );
                             }
+
+                            @Override
+                            public String toString() {
+                                return "analyzeResources";
+                            }
                         };
                     case "2":
                         return new Task() {
                             @Override
                             public void run() {
                                 Engine.analyzeVillageBuildingsInP( driver );
+                            }
+
+                            @Override
+                            public String toString() {
+                                return "analyzeVillageBuildings";
                             }
                         };
                     case "3":
@@ -27,12 +39,22 @@ public class TasksManager {
                             public void run() {
                                 Engine.analyzeTroops( driver );
                             }
+
+                            @Override
+                            public String toString() {
+                                return "analyzeTroops";
+                            }
                         };
                     case "4":
                         return new Task() {
                             @Override
                             public void run() {
                                 Engine.analyzeSlots( driver );
+                            }
+
+                            @Override
+                            public String toString() {
+                                return "analyzeSlots";
                             }
                         };
                     default:
@@ -44,9 +66,9 @@ public class TasksManager {
                         return new Task() {
                             @Override
                             public void run() {
-                                Market.enterMarketWindow( driver );
+                                Market.sendResources( driver, this.parametress );
                             }
-                        };
+                        }.params( params );
                 }
             case "Barraks" :
                 switch ( id ){
@@ -60,12 +82,22 @@ public class TasksManager {
                             public void run() {
                                 Saver.loadTroops();
                             }
+
+                            @Override
+                            public String toString() {
+                                return "loadTroops";
+                            }
                         };
                     case "4":
                         return new Task() {
                             @Override
                             public void run() {
                                 Saver.loadBuildings();
+                            }
+
+                            @Override
+                            public String toString() {
+                                return "loadBuildings";
                             }
                         };
                     default:

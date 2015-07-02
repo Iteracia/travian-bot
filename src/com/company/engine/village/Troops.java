@@ -1,7 +1,11 @@
 package com.company.engine.village;
 
+import com.company.engine.Engine;
+
 import java.io.Serializable;
 import java.util.*;
+import java.awt.datatransfer.*;
+import java.awt.Toolkit;
 
 public class Troops {
     /*
@@ -85,12 +89,33 @@ public class Troops {
         this.army = army;
     }
 
+    public static void copyToClipboardForGetterTools(){
+        StringBuilder builder = new StringBuilder(  );
+        builder.append( "Войска в деревнях\n" );
+        builder.append( "Легионер\tПреторианец\tИмперианец\tКонный разведчик\tКонница императора\tКонница Цезаря\tТаран\tОгненная катапульта\tСенатор\tПоселенец\tГерой\n" );
+        for ( Village village : Engine.villages ) {
+            builder.append( village.getName()+"\t" );
+            List<troop> army = village.troops().army;
+            for ( int i = 0; i < army.size(); i++ ) {
+                builder.append( army.get( i ).count );
+                if ( i != army.size()-1 ){
+                    builder.append( "\t" );
+                }
+            }
+            builder.append( "\n" );
+        }
+        String myString = builder.toString();
+        System.out.println("tools>"+myString+"<");
+        StringSelection stringSelection = new StringSelection (myString);
+        Clipboard clpbrd = Toolkit.getDefaultToolkit ().getSystemClipboard ();
+        clpbrd.setContents (stringSelection, null);
+        System.out.println(" < Troops table put to clipboard");
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        army.forEach( troop -> {
-            builder.append( troop.toString() ).append("\n");
-        });
+        army.forEach( troop -> builder.append( troop.toString() ).append("\n"));
         return builder.toString();
     }
 }

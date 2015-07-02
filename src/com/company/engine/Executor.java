@@ -4,13 +4,14 @@ import com.company.NodeListWrapper;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
-
-import com.company.engine.building.Rallypoint;
 import org.openqa.selenium.WebDriver;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 public class Executor implements Runnable{
@@ -57,7 +58,7 @@ public class Executor implements Runnable{
             doc.getDocumentElement().normalize();
             List<Node> commands = NodeListWrapper.takeThis( doc.getElementsByTagName( "command" ) );
             commands.forEach( node -> {
-                Task newTask = TasksManager.manage( node.getAttributes().getNamedItem( "type" ).getNodeValue(), node.getAttributes().getNamedItem( "id" ).getNodeValue() );
+                Task newTask = TasksManager.manage( node.getAttributes().getNamedItem( "type" ).getNodeValue(), node.getAttributes().getNamedItem( "id" ).getNodeValue(), null );
                 newTask.driver( localDriver ).run();
             } );
         }catch ( Exception e ){
@@ -74,7 +75,7 @@ public class Executor implements Runnable{
             doc.getDocumentElement().normalize();
             List<Node> commands = NodeListWrapper.takeThis( doc.getElementsByTagName( "command" ) );
             commands.forEach( node -> {
-                Task newTask = TasksManager.manage( node.getAttributes().getNamedItem( "type" ).getNodeValue(), node.getAttributes().getNamedItem( "id" ).getNodeValue() );
+                Task newTask = TasksManager.manage( node.getAttributes().getNamedItem( "type" ).getNodeValue(), node.getAttributes().getNamedItem( "id" ).getNodeValue(), null );
                 tasks.add( newTask );
             });
             Engine.analyzeExps( localDriver, tasks );
@@ -94,7 +95,8 @@ public class Executor implements Runnable{
             doc.getDocumentElement().normalize();
             List<Node> commands = NodeListWrapper.takeThis( doc.getElementsByTagName( "command" ) );
             commands.forEach( node -> {
-                Task newTask = TasksManager.manage( node.getAttributes().getNamedItem( "type" ).getNodeValue(), node.getAttributes().getNamedItem( "id" ).getNodeValue() );
+                Map<String,String> params = parseParamsForNode( (Element)node );
+                Task newTask = TasksManager.manage( node.getAttributes().getNamedItem( "type" ).getNodeValue(), node.getAttributes().getNamedItem( "id" ).getNodeValue(), params );
                 if ( newTask!=null ) {
                     tasks.add( newTask );
                 }
@@ -104,6 +106,17 @@ public class Executor implements Runnable{
             System.out.println("executor.analyzeCommands error");
             e.printStackTrace();
         }
+    }
+    private Map<String,String> parseParamsForNode(Element node){
+        Map<String,String> params = new HashMap<>(  );
+        NodeListWrapper.takeThis( node.getChildNodes() ).forEach( nodeCh ->{
+            if ( nodeCh.getChildNodes().getLength()>0 )
+                params.putAll( parseParamsForNode( (Element)nodeCh ) );
+        } );
+        if(node.getChildNodes().getLength() == 1) {
+            params.put( node.getNodeName(), node.getTextContent().replace( "\n","" ) );
+        }
+        return params;
     }
 
     private void read(){

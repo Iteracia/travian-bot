@@ -29,6 +29,7 @@ public class Saver {
                 List<Building> buildings = village.getBuildings();
                 out.writeObject( buildings );
             }
+            System.out.println(" < Buildings Saved ");
         }catch ( Exception e ){
             System.out.println("Saver.saveBuildings error");
             e.printStackTrace();
@@ -40,6 +41,7 @@ public class Saver {
             for ( Village village : Engine.villages ) {
                 village.setBuildings( (List)in.readObject() );
             }
+            System.out.println(" < Buildings Loaded ");
         }catch ( Exception e ){
             System.out.println("Saver.loadBuildings error");
             e.printStackTrace();
@@ -54,6 +56,7 @@ public class Saver {
                 List<Troops.troop> army = village.troops().getArmy();
                 out.writeObject( army );
             }
+            System.out.println(" < Troops Saved ");
         }catch ( Exception e ){
             System.out.println("Saver.saveTroops error");
             e.printStackTrace();
@@ -64,8 +67,9 @@ public class Saver {
         try ( FileInputStream fileIn = new FileInputStream( "./save/troops.ser" );
               ObjectInputStream in = new ObjectInputStream( fileIn )){
             for ( Village village : Engine.villages ) {
-                village.troops().setArmy( (List)in.readObject() );
+                village.troops().setArmy( (List) in.readObject() );
             }
+            System.out.println(" < Troops Loaded ");
         }catch ( Exception e ){
             System.out.println("Saver.loadTroops error");
             e.printStackTrace();

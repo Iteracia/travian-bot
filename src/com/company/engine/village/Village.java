@@ -2,9 +2,6 @@ package com.company.engine.village;
 
 import com.company.Settings;
 import com.company.engine.building.Building;
-
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,5 +61,9 @@ public class Village {
 
     public void setBuildings( List<Building> buildings ) {
         this.buildings = buildings;
+    }
+
+    public String getName() {
+        return name;
     }
 }
