@@ -6,6 +6,7 @@ public class Settings {
     public static String login;
     public static String password;
     public static final boolean printAllBuildings = false;
+    public static final boolean deleteXMLCommandsOnRead = false;
 
     static {
         File info = new File( "./settings.txt" );

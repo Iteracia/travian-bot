@@ -1,6 +1,7 @@
 package com.company.engine.village;
 
 import com.company.engine.Engine;
+import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 
 import java.io.Serializable;
 import java.util.*;
@@ -90,22 +91,37 @@ public class Troops {
     }
 
     public static void copyToClipboardForGetterTools(){
+        List<Integer> total = new ArrayList<>( 11 );
+        Collections.addAll( total, 0,0,0,0,0,0,0,0,0,0,0 );
         StringBuilder builder = new StringBuilder(  );
-        builder.append( "Войска в деревнях\n" );
-        builder.append( "Легионер\tПреторианец\tИмперианец\tКонный разведчик\tКонница императора\tКонница Цезаря\tТаран\tОгненная катапульта\tСенатор\tПоселенец\tГерой\n" );
+        builder.append( "Собственные войска\n  \nВойска в деревнях\n" );
+        builder.append( "Деревня\tЛегионер\tПреторианец\tИмперианец\tКонный разведчик\tКонница императора\tКонница Цезаря\tТаран\tОгненная катапульта\tСенатор\tПоселенец\tГерой\n" );
         for ( Village village : Engine.villages ) {
             builder.append( village.getName()+"\t" );
             List<troop> army = village.troops().army;
             for ( int i = 0; i < army.size(); i++ ) {
                 builder.append( army.get( i ).count );
+                total.set( i, total.get( i )+army.get( i ).count );
                 if ( i != army.size()-1 ){
                     builder.append( "\t" );
                 }
             }
             builder.append( "\n" );
         }
-        String myString = builder.toString();
-        System.out.println("tools>"+myString+"<");
+        builder.append( "Итого\t" );
+        for ( int i = 0; i < total.size(); i++ ) {
+            builder.append( total.get( i ));
+            if ( i != total.size()-1 ){
+                builder.append( "\t" );
+            }
+        }
+        builder.append( "\n" );
+        StringBuilder wholeString = new StringBuilder(  );
+        int mIndex = wholeString.indexOf( "<mark>" );
+        wholeString.replace( mIndex, mIndex+6 ,"" );
+        wholeString.insert( mIndex, builder.toString() );
+        String myString = wholeString.toString();
+        //System.out.println( "tools>" + myString + "<" );
         StringSelection stringSelection = new StringSelection (myString);
         Clipboard clpbrd = Toolkit.getDefaultToolkit ().getSystemClipboard ();
         clpbrd.setContents (stringSelection, null);

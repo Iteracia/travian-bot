@@ -3,12 +3,15 @@ package com.company.engine;
 import com.company.NodeListWrapper;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
+import com.company.Settings;
+import com.company.engine.village.Troops;
 import org.openqa.selenium.WebDriver;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -37,6 +40,7 @@ public class Executor implements Runnable{
         Engine.login( localDriver );
         analyzeAndExecuteDefault();
         loadCommands();
+        Troops.copyToClipboardForGetterTools();
         analyzeCommands();
         read();
         Engine.closeDrivers();
@@ -88,10 +92,10 @@ public class Executor implements Runnable{
 
     private void analyzeCommands(){
         try {
-            File defaultTasks = new File( "commands.xml" );
+            File taskFile = new File( "commands.xml" );
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse( defaultTasks );
+            Document doc = dBuilder.parse( taskFile );
             doc.getDocumentElement().normalize();
             List<Node> commands = NodeListWrapper.takeThis( doc.getElementsByTagName( "command" ) );
             commands.forEach( node -> {
@@ -101,6 +105,15 @@ public class Executor implements Runnable{
                     tasks.add( newTask );
                 }
             });
+            if ( Settings.deleteXMLCommandsOnRead ){
+                FileWriter writer = new FileWriter( taskFile );
+                writer.write( "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                        "<commands xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+                        "          xsi:noNamespaceSchemaLocation=\"./resources/command.xsd\">\n" +
+                        "</commands>" );
+                writer.flush();
+                writer.close();
+            }
             execute();
         }catch ( Exception e ){
             System.out.println("executor.analyzeCommands error");

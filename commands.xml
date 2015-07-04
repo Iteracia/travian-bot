@@ -1,19 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <commands xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:noNamespaceSchemaLocation="./resources/command.xsd">
-    <command type="Market" id="2">
-        <from>2</from>
-        <to>
-            <coords>
-                <x>1</x>
-                <y>-140</y>
-            </coords>
-        </to>
-        <resources>
-            <wood>1000</wood>
-            <clay>1000</clay>
-            <iron>1000</iron>
-            <grain>1000</grain>
-        </resources>
-    </command>
 </commands>

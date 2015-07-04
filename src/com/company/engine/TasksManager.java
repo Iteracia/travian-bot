@@ -1,7 +1,6 @@
 package com.company.engine;
 
 import com.company.engine.building.Market;
-
 import java.util.Map;
 
 public class TasksManager {
@@ -15,7 +14,6 @@ public class TasksManager {
                             public void run() {
                                 Engine.analyzeResources( driver );
                             }
-
                             @Override
                             public String toString() {
                                 return "analyzeResources";
@@ -27,7 +25,6 @@ public class TasksManager {
                             public void run() {
                                 Engine.analyzeVillageBuildingsInP( driver );
                             }
-
                             @Override
                             public String toString() {
                                 return "analyzeVillageBuildings";
@@ -39,7 +36,6 @@ public class TasksManager {
                             public void run() {
                                 Engine.analyzeTroops( driver );
                             }
-
                             @Override
                             public String toString() {
                                 return "analyzeTroops";
@@ -51,7 +47,6 @@ public class TasksManager {
                             public void run() {
                                 Engine.analyzeSlots( driver );
                             }
-
                             @Override
                             public String toString() {
                                 return "analyzeSlots";
@@ -82,7 +77,6 @@ public class TasksManager {
                             public void run() {
                                 Saver.loadTroops();
                             }
-
                             @Override
                             public String toString() {
                                 return "loadTroops";
@@ -94,7 +88,6 @@ public class TasksManager {
                             public void run() {
                                 Saver.loadBuildings();
                             }
-
                             @Override
                             public String toString() {
                                 return "loadBuildings";
