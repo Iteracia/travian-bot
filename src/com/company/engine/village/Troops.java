@@ -1,9 +1,24 @@
 package com.company.engine.village;
 
 import com.company.engine.Engine;
-import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
+import org.openqa.selenium.WebDriver;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
+import java.io.File;
 import java.io.Serializable;
+import java.io.StringWriter;
 import java.util.*;
 import java.awt.datatransfer.*;
 import java.awt.Toolkit;
@@ -32,6 +47,7 @@ public class Troops {
                     ***
      */
     private static KVmap<String, Integer> troopNameMap = new KVmap<>();
+    private static Map<Integer, Integer> tropsSpeedMap = new HashMap<>();
 
     private List<troop> army;
 
@@ -62,6 +78,7 @@ public class Troops {
         troopNameMap.put( "Сенаторов",9 );
         troopNameMap.put( "Поселенцев",10 );
         troopNameMap.put( "Герой",11 );
+
     }
 
 
@@ -91,41 +108,37 @@ public class Troops {
     }
 
     public static void copyToClipboardForGetterTools(){
-        List<Integer> total = new ArrayList<>( 11 );
-        Collections.addAll( total, 0,0,0,0,0,0,0,0,0,0,0 );
-        StringBuilder builder = new StringBuilder(  );
-        builder.append( "Собственные войска\n  \nВойска в деревнях\n" );
-        builder.append( "Деревня\tЛегионер\tПреторианец\tИмперианец\tКонный разведчик\tКонница императора\tКонница Цезаря\tТаран\tОгненная катапульта\tСенатор\tПоселенец\tГерой\n" );
-        for ( Village village : Engine.villages ) {
-            builder.append( village.getName()+"\t" );
-            List<troop> army = village.troops().army;
-            for ( int i = 0; i < army.size(); i++ ) {
-                builder.append( army.get( i ).count );
-                total.set( i, total.get( i )+army.get( i ).count );
-                if ( i != army.size()-1 ){
-                    builder.append( "\t" );
+        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder;
+        try {
+            builder = builderFactory.newDocumentBuilder();
+            String filePath = "./resources/troopsTable.xml";
+            String outPath = "./resources/troops.html";
+            Document document = builder.parse( filePath );
+            document.getDocumentElement().normalize();
+            XPath xPath = XPathFactory.newInstance().newXPath();
+
+            for ( int i = 1; i <= Engine.villages.size(); i++ ) {
+                for ( int j = 1; j < 12; j++ ) {
+                    String expression = "//*[@id=\"troops\"]/tbody/tr["+i+"]/td["+j+"]";
+                    Node element = (Node) xPath.compile( expression ).evaluate( document, XPathConstants.NODE );
+                    element.setTextContent( String.valueOf( Engine.villages.get( i-1 ).troops().army.get( j-1 ).count ) );
                 }
             }
-            builder.append( "\n" );
+
+            TransformerFactory tFactory = TransformerFactory.newInstance();
+            Transformer transformer = tFactory.newTransformer();
+            transformer.setOutputProperty( OutputKeys.METHOD, "html" );
+            transformer.setOutputProperty( OutputKeys.INDENT, "no" );
+            DOMSource source = new DOMSource( document );
+            StreamResult result = new StreamResult( new File( outPath ) );
+            transformer.transform( source, result );
+            Engine.newDriver().get( "file:///C:/travian/resources/troops.html" );
+            System.out.println(" < Window with troops is opened");
+        }catch ( Exception e ){
+            e.printStackTrace();
+            System.exit( 0 );
         }
-        builder.append( "Итого\t" );
-        for ( int i = 0; i < total.size(); i++ ) {
-            builder.append( total.get( i ));
-            if ( i != total.size()-1 ){
-                builder.append( "\t" );
-            }
-        }
-        builder.append( "\n" );
-        StringBuilder wholeString = new StringBuilder(  );
-        int mIndex = wholeString.indexOf( "<mark>" );
-        wholeString.replace( mIndex, mIndex+6 ,"" );
-        wholeString.insert( mIndex, builder.toString() );
-        String myString = wholeString.toString();
-        //System.out.println( "tools>" + myString + "<" );
-        StringSelection stringSelection = new StringSelection (myString);
-        Clipboard clpbrd = Toolkit.getDefaultToolkit ().getSystemClipboard ();
-        clpbrd.setContents (stringSelection, null);
-        System.out.println(" < Troops table put to clipboard");
     }
 
     @Override
@@ -134,4 +147,5 @@ public class Troops {
         army.forEach( troop -> builder.append( troop.toString() ).append("\n"));
         return builder.toString();
     }
+
 }

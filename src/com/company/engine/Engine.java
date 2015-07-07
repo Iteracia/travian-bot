@@ -2,6 +2,7 @@ package com.company.engine;
 
 import com.company.Settings;
 import com.company.engine.building.Building;
+import com.company.engine.building.Rallypoint;
 import com.company.engine.village.Resources;
 import com.company.engine.village.Village;
 import org.openqa.selenium.By;
@@ -52,6 +53,11 @@ public class Engine {
 
     public static void closeDrivers(){
         drivers.forEach( WebDriver::close );
+    }
+
+    public synchronized static void closeDriver( WebDriver driver ){
+        drivers.remove( driver );
+        driver.close();
     }
 
     public static void init(){
@@ -155,7 +161,7 @@ public class Engine {
     }
 
     public static void analyzeTroops( WebDriver driver ){
-        driver.get( "http://ts2.travian.ru/build.php?tt=1&gid=16" );
+        Rallypoint.enterOverView( driver );
         List<WebElement> unitsLists = driver.findElements( By.cssSelector( ".units.last" ) );
         for ( WebElement unitsList : unitsLists ) {
             for ( int i = 1; i < 12; i++ ) {
@@ -174,5 +180,21 @@ public class Engine {
 
     public static Village getCurrentVillage(){
         return villages.get( CurrentExp.ince().getCvindex()-1 );
+    }
+
+    public static String secsToTime( long totalSecs ){
+        long hours = totalSecs / 3600;
+        long minutes = (totalSecs % 3600) / 60;
+        long seconds = totalSecs % 60;
+        String timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        return timeString;
+    }
+    public static long timeToSecs(String time){
+        long seconds;
+        String[] splited = time.split(":");
+        seconds = Integer.parseInt( splited[0] )*3600;
+        seconds += Integer.parseInt( splited[1] )*60;
+        seconds += Integer.parseInt( splited[2] );
+        return seconds;
     }
 }

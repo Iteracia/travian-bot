@@ -1,5 +1,4 @@
 package com.company;
-
 import com.company.engine.Executor;
 
 public class Main {

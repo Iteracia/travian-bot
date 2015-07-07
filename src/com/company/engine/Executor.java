@@ -2,16 +2,14 @@ package com.company.engine;
 
 import com.company.NodeListWrapper;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.InputStreamReader;
+import java.util.*;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import com.company.Settings;
-import com.company.engine.village.Troops;
 import org.openqa.selenium.WebDriver;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -23,8 +21,12 @@ public class Executor implements Runnable{
         return ourInstance;
     }
     private final long updateDelta; // delta time before ask whether the executeList is empty
-    private static List<Task> tasks = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
     private final WebDriver localDriver;
+
+    public WebDriver getLocalDriver() {
+        return localDriver;
+    }
 
     private Executor() {
         Engine.init();
@@ -32,25 +34,28 @@ public class Executor implements Runnable{
         updateDelta = 1000;
     }
 
-    public static void addTask ( Task task ){
+    public synchronized void addTask ( Task task ){
         tasks.add( task );
+    }
+    private synchronized void clearTasks(){
+        tasks.clear();
     }
     @Override
     public void run() {
         Engine.login( localDriver );
         analyzeAndExecuteDefault();
         loadCommands();
-        Troops.copyToClipboardForGetterTools();
         analyzeCommands();
-        read();
+        readCommand();
         Engine.closeDrivers();
     }
 
-    private void execute(){
+    private synchronized void execute(){
         tasks.forEach( task ->{
             task.driver = localDriver;
             task.run();
         } );
+        clearTasks();
     }
 
     private void loadCommands(){
@@ -80,10 +85,10 @@ public class Executor implements Runnable{
             List<Node> commands = NodeListWrapper.takeThis( doc.getElementsByTagName( "command" ) );
             commands.forEach( node -> {
                 Task newTask = TasksManager.manage( node.getAttributes().getNamedItem( "type" ).getNodeValue(), node.getAttributes().getNamedItem( "id" ).getNodeValue(), null );
-                tasks.add( newTask );
+                addTask( newTask );
             });
             Engine.analyzeExps( localDriver, tasks );
-            tasks.clear();
+            clearTasks();
         }catch ( Exception e ){
             System.out.println("executor.analyzeDefault error");
             e.printStackTrace();
@@ -132,9 +137,37 @@ public class Executor implements Runnable{
         return params;
     }
 
-    private void read(){
+    private Map<String,String> parseParamsForConsole(String string){
+        Map<String,String> params = new HashMap<>();
+        List<String> splited = Arrays.asList( string.split( " " ) );
+        splited.forEach( param -> {
+            String[] spl = param.split( "=" );
+            params.put( spl[0], spl[1] );
+        } );
+        return params;
+    }
+
+    private void readCommand(){
+        String command = read();
+        while ( command != "exit" ) {
+            Map<String, String> params = parseParamsForConsole( command );
+            try {
+                addTask( TasksManager.manage( params.get( "ComType" ), params.get( "ComId" ), params ) );
+            } catch ( NullPointerException e ) {
+                System.out.println( " Command input error probably " );
+            }
+            execute();
+            command = read();
+        }
+    }
+    private String read(){
         try{
-            System.in.read();
-        }catch ( Exception e ){}
+            System.out.println(" < Enter command to execute ( ComType ComId is required )");
+            System.out.printf( " > " );
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            return br.readLine();
+        }catch ( Exception e ){
+            return "";
+        }
     }
 }

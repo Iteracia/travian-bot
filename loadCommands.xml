@@ -3,5 +3,5 @@
           xsi:noNamespaceSchemaLocation="./resources/command.xsd">
     <!--All load commands should be here-->
     <command id="4" type="Load"/>
-    <command id="3" type="Load"/>
+    <!--<command id="3" type="Load"/>&lt;!&ndash;troops&ndash;&gt;-->
 </commands>

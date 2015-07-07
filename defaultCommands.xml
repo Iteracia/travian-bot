@@ -4,6 +4,6 @@
     <!--Commands applied for each village on start-->
     <!--<command type="Analyze" id="1" tip="Res"/>-->
     <!--<command type="Analyze" id="2" tip="VillageBuildings"/>-->
-    <!--<command type="Analyze" id="3" tip="Troops"/>-->
     <!--<command type="Analyze" id="4" tip="Slots"/>-->
+    <!--<command type="Analyze" id="3" tip="Troops"/>-->
 </commands>

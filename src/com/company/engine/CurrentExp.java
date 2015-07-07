@@ -122,10 +122,12 @@ public class CurrentExp {
                 int oid = getBuildingId( "Рынок" );
                 driver.get( "http://ts2.travian.ru/build.php?id="+oid );
                 Engine.wait.until( ExpectedConditions.presenceOfElementLocated( By.xpath( "//*[@id=\"build\"]/div[1]/div[2]/div[3]" ) ) );
+                currentWindow = 3;
                 break;
             case 4:
                 oid = getBuildingId( "Пункт сбора" );
                 driver.get( "http://ts2.travian.ru/build.php?id="+oid );
+                currentWindow = 4;
                 break;
             default:
                 System.out.println("CurrentExp.changeWindow index out of range");

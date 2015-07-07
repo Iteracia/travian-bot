@@ -1,6 +1,9 @@
 package com.company.engine;
 
 import com.company.engine.building.Market;
+import com.company.engine.building.Rallypoint;
+import com.company.engine.village.Troops;
+
 import java.util.Map;
 
 public class TasksManager {
@@ -52,6 +55,17 @@ public class TasksManager {
                                 return "analyzeSlots";
                             }
                         };
+                    case "5":
+                        return new Task() {
+                            @Override
+                            public void run() {
+                                Troops.copyToClipboardForGetterTools();
+                            }
+                            @Override
+                            public String toString() {
+                                return "getterTable";
+                            }
+                        };
                     default:
                         throw new IndexOutOfBoundsException( "id analyze index out of range" );
                 }
@@ -95,6 +109,20 @@ public class TasksManager {
                         };
                     default:
                         throw new IndexOutOfBoundsException( "id load index out of range" );
+                }
+            case "RallyPoint" :
+                switch ( id ){
+                    case "3":
+                        return new Task() {
+                            @Override
+                            public void run() {
+                                Rallypoint.sendTroops( params );
+                            }
+                            @Override
+                            public String toString() {
+                                return "RallyPoint sendTroops";
+                            }
+                        };
                 }
             default:
                 throw new IndexOutOfBoundsException( "type index out of range" );

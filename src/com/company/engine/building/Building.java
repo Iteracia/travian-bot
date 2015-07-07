@@ -1,5 +1,7 @@
 package com.company.engine.building;
 
+import com.company.engine.Engine;
+
 import java.io.Serializable;
 
 public class Building implements Serializable{
@@ -78,10 +80,7 @@ public class Building implements Serializable{
         }
         public Builder timeLeft(String timeLeftInfo){
             timeLeftStr = timeLeftInfo;
-            String[] splited = timeLeftInfo.split(":");
-            timeLeftSecs = Integer.parseInt( splited[0] )*3600;
-            timeLeftSecs += Integer.parseInt( splited[1] )*60;
-            timeLeftSecs += Integer.parseInt( splited[2] );
+            timeLeftSecs = Engine.timeToSecs( timeLeftInfo );
             inProgress = true;
             return this;
         }
