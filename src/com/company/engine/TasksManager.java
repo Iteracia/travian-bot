@@ -123,6 +123,28 @@ public class TasksManager {
                                 return "RallyPoint sendTroops";
                             }
                         };
+                    case "5":
+                        return new Task() {
+                            @Override
+                            public void run() {
+                                Rallypoint.sendFarmList( params );
+                            }
+                            @Override
+                            public String toString() {
+                                return "RallyPoint sendFarmList";
+                            }
+                        };
+                    case "6":
+                        return new Task() {
+                            @Override
+                            public void run() {
+                                Rallypoint.fillFarmList( params );
+                            }
+                            @Override
+                            public String toString() {
+                                return "RallyPoint fillFarmList";
+                            }
+                        };
                 }
             default:
                 throw new IndexOutOfBoundsException( "type index out of range" );

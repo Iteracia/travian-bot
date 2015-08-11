@@ -5,6 +5,7 @@ import java.io.*;
 public class Settings {
     public static String login;
     public static String password;
+    public static String world = "http://ts3.travian.ru";
     public static final boolean printAllBuildings = false;
     public static final boolean deleteXMLCommandsOnRead = false;
 

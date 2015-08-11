@@ -42,6 +42,17 @@ public class Engine {
         }
     }
 
+    public static void fastW8(){
+        try {
+            Random rr = new Random();
+            int rvalue = rr.nextInt(5) + 1;
+            Thread.sleep(rvalue * 100);
+        }catch (Exception e){
+            System.out.println("Engine.w8alittle error : "+e);
+            e.printStackTrace();
+        }
+    }
+
     public static WebDriver newDriver() throws IllegalStateException{
         if(!initialised){
             throw new IllegalStateException("engine is not initialised!");
@@ -71,7 +82,7 @@ public class Engine {
     }
 
     public static void login( WebDriver driver ){
-        driver.get("http://ts2.travian.ru");
+        driver.get( Settings.world );
         WebElement loginInput = driver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/div[1]/form/table/tbody/tr[1]/td[2]/input"));
         loginInput.sendKeys( Settings.login );
         WebElement passInput = driver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/div[1]/form/table/tbody/tr[2]/td[2]/input"));
@@ -189,7 +200,7 @@ public class Engine {
         String timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
         return timeString;
     }
-    public static long timeToSecs(String time){
+    public static long timeToSecs( String time ){
         long seconds;
         String[] splited = time.split(":");
         seconds = Integer.parseInt( splited[0] )*3600;
