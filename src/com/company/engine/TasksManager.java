@@ -145,6 +145,17 @@ public class TasksManager {
                                 return "RallyPoint fillFarmList";
                             }
                         };
+                    case "7":
+                        return new Task() {
+                            @Override
+                            public void run() {
+                                Rallypoint.copyFarmList( params );
+                            }
+                            @Override
+                            public String toString() {
+                                return "RallyPoint fillFarmList";
+                            }
+                        };
                 }
             default:
                 throw new IndexOutOfBoundsException( "type index out of range" );
