@@ -170,13 +170,13 @@ public class Rallypoint {
             Matcher matcher = patternX.matcher( href );
             String xCoord, yCoord;
             if ( matcher.matches() ){
-                xCoord = matcher.group( 1 ).replace( "x=","" );
+                xCoord = matcher.group( 1 );
             } else {
                 throw new InvalidParameterException("cant parse x coord in RallyPoint.copyFarmList");
             }
             matcher = patternY.matcher( href );
             if ( matcher.matches() ){
-                yCoord = matcher.group( 1 ).replace( "y=","" );
+                yCoord = matcher.group( 1 );
             } else {
                 throw new InvalidParameterException("cant parse y coord in RallyPoint.copyFarmList");
             }
